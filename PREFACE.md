@@ -1,3 +1,5 @@
+[![Join the chat at https://gitter.im/jhoek/UncommonSense.Nav.Automation](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jhoek/UncommonSense.Nav.Automation?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ### Notes
 These functions support virtually all NAV versions - even versions that don't have native PowerShell or CLI (command line interface) support. Due to the technology used, the functions will only work in 32-bit (x86) PowerShell environments.
 
