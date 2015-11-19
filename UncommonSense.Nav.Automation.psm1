@@ -18,6 +18,7 @@ Add-Type -Path (Join-Path $PSScriptRoot Org.Edgerunner.Dynamics.Nav.CSide.dll)
 . (Join-Path $PSScriptRoot Compile-NAVApplicationObject.ps1)
 . (Join-Path $PSScriptRoot Start-NAVDevelopmentClient.ps1)
 . (Join-Path $PSScriptRoot Stop-NAVDevelopmentClient.ps1)
+. (Join-Path $PSScriptRoot New-NAVObjectFilter.ps1)
 
 Export-ModuleMember -Function Get-NAVDevelopmentClientConfig
 Export-ModuleMember -Function Get-NAVDatabaseConnectionConfig
@@ -29,3 +30,4 @@ Export-ModuleMember -Function Export-NAVApplicationObject
 Export-ModuleMember -Function Compile-NAVApplicationObject
 Export-ModuleMember -Function Start-NAVDevelopmentClient
 Export-ModuleMember -Function Stop-NAVDevelopmentClient
+Export-ModuleMember -Function New-NAVObjectFilter
