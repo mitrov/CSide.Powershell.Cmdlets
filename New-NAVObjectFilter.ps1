@@ -127,7 +127,7 @@ function SummarizeRanges
     {
         $First = $GroupedValue.Group | Select-Object -First 1 -ExpandProperty Name
         $Last = $GroupedValue.Group | Select-Object -Last 1 -ExpandProperty Name
-        $Ranges += "$First..$Last"
+        $Ranges += if ($First -eq $Last) { "$First" } else { "$First..$Last" }
     }
 
     $Ranges -join '|'
