@@ -54,7 +54,7 @@ function New-NAVObjectFilter
 
     if ($ID)
     {
-        $Filters.ID = $ID -join '|'
+        $Filters.ID = SummarizeRanges -Values $ID
     }
 
     if ($Name)
@@ -105,4 +105,32 @@ function New-NAVObjectFilter
     ($Filters.GetEnumerator() | ForEach-Object { "$($_.Key)=$($_.Value)" }) -join ';'
 }
 
-New-NAVObjectFilter -Table -Page -Report -Codeunit -MenuSuite -XmlPort -ID (15..20) -Name Foo*Baz -Caption Blaat -Compiled $true -Date (Get-Date) -Time 23:01:05 -VersionList OinkBoink1.00 -Locked $true
+function SummarizeRanges
+{
+    Param
+    (
+        [int[]]$Values
+    )
+
+    $SortedValues = $Values | Sort-Object
+    $IndexedValues = [Ordered]@{}
+
+    for($Index = 0; $Index -lt $SortedValues.Length; $Index++)
+    {
+        $IndexedValues.Add($SortedValues[$Index], $SortedValues[$Index] - $Index)
+    }
+
+    $GroupedValues = $IndexedValues.GetEnumerator() | Group-Object -Property Value
+    $Ranges = @()
+
+    foreach($GroupedValue in $GroupedValues)
+    {
+        $First = $GroupedValue.Group | Select-Object -First 1 -ExpandProperty Name
+        $Last = $GroupedValue.Group | Select-Object -Last 1 -ExpandProperty Name
+        $Ranges += "$First..$Last"
+    }
+
+    $Ranges -join '|'
+}
+
+New-NAVObjectFilter -Table -Page -Report -Codeunit -MenuSuite -XmlPort -ID 50000, 50001, 50002, 50005, 50006 -Name Foo*Baz -Caption Blaat -Compiled $true -Date (Get-Date) -Time 23:01:05 -VersionList OinkBoink1.00 -Locked $true
