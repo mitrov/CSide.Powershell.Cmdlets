@@ -99,7 +99,7 @@ function New-NAVObjectFilter
 
     if ($LockedBy)
     {
-        $Filters.LockedBy = $LockedBy
+        $Filters.'Locked By' = $LockedBy
     }
 
     ($Filters.GetEnumerator() | ForEach-Object { "$($_.Key)=$($_.Value)" }) -join ';'
