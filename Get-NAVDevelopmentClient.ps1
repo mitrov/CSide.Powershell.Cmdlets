@@ -42,7 +42,7 @@ function Get-NAVDevelopmentClient
         $ParameterAttribute.ParameterSetName = 'Config'
 
         $ConfigListFileName = Join-Path $PSScriptRoot 'devclients.txt'
-        $Header = 'Name','DevEnvPath','DatabaseServerType','DatabaseServerName','DatabaseName','ZupPath'
+        $Header = 'Name','DevEnvPath','DatabaseServerType','DatabaseServerName','DatabaseName','ZupPath','NTAuthentication','NetType'
         $Configs = Import-Csv -Path $ConfigListFileName -Header $Header | ForEach-Object { $_.Name }
         $ValidateSetAttribute = New-Object System.Management.Automation.ValidateSetAttribute($Configs)
 
@@ -64,7 +64,7 @@ function Get-NAVDevelopmentClient
         if ($PSCmdlet.MyInvocation.BoundParameters.ConfigName)
         {
             $ConfigListFileName = Join-Path $PSScriptRoot 'devclients.txt'
-            $Header = 'Name','DevEnvPath','DatabaseServerType','DatabaseServerName','DatabaseName','ZupPath'
+            $Header = 'Name','DevEnvPath','DatabaseServerType','DatabaseServerName','DatabaseName','ZupPath','NTAuthentication','NetType'
             $Configs = Import-Csv -Path $ConfigListFileName -Header $Header
             $Config = $Configs | Where-Object Name -eq $PSCmdlet.MyInvocation.BoundParameters.ConfigName
         
@@ -77,6 +77,8 @@ function Get-NAVDevelopmentClient
             $DatabaseServerName = $Config.DatabaseServerName 
             $DatabaseName = $Config.DatabaseName
             $ZupPath = $Config.ZupPath
+            $NTAuthentication = $Config.NTAuthentication
+            $NetType = $Config.NetType
         }
 
         $FilteredClients = Get-FilteredClients -DatabaseServerType $DatabaseServerType -DatabaseServerName $DatabaseServerName -DatabaseName $DatabaseName
@@ -90,6 +92,16 @@ function Get-NAVDevelopmentClient
             if ($ZupPath) 
             { 
                 $Arguments += ('id={0}' -f $ZupPath)  
+            }
+
+            if ($NTAuthentication) 
+            { 
+                $Arguments += ('ntauthentication={0}' -f $NTAuthentication)  
+            }
+
+            if ($NetType)
+            { 
+                $Arguments += ('nettype={0}' -f $NetType)  
             }
 
             $Process = Start-Process -FilePath $Config.DevEnvPath -ArgumentList ($Arguments -join ',') -PassThru
