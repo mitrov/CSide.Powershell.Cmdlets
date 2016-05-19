@@ -15,6 +15,7 @@ Add-Type -Path (Join-Path $PSScriptRoot Org.Edgerunner.Dynamics.Nav.CSide.dll)
 . (Join-Path $PSScriptRoot Export-NAVApplicationObject.ps1)
 . (Join-Path $PSScriptRoot Compile-NAVApplicationObject.ps1)
 . (Join-Path $PSScriptRoot Set-WindowStyle.ps1)
+. (Join-Path $PSScriptRoot Find-InNAVApplicationObject.ps1)
 
 Export-ModuleMember -Function Get-NAVDevelopmentClient
 Export-ModuleMember -Function Start-NAVDebugger
@@ -22,3 +23,4 @@ Export-ModuleMember -Function Get-NAVApplicationObjectInfo
 Export-ModuleMember -Function Import-NAVApplicationObject
 Export-ModuleMember -Function Export-NAVApplicationObject
 Export-ModuleMember -Function Compile-NAVApplicationObject
+Export-ModuleMember -Function Find-InNAVApplicationObject
