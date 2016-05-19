@@ -1,7 +1,7 @@
 ﻿. C:\users\jhoek\GitHub\Scripts\Get-HelpAsMarkDown.ps1
 Set-Location C:\Users\jhoek\Documents\WindowsPowerShell\Modules\UncommonSense.Nav.Automation
 
-Import-Module UncommonSense.Nav.Automation -Force
+Import-Module UncommonSense.Nav.Automation -Force -Verbose
 Get-Command `
     -Module UncommonSense.Nav.Automation | `
     Sort-Object -Property Noun,Verb | `
