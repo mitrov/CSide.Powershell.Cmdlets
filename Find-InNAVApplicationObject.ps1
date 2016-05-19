@@ -1,6 +1,39 @@
 <#
 .SYNOPSIS
 A NAV-aware Select-String; finds a given regular expression in a NAV text export. 
+
+.EXAMPLE
+Find-InNAVApplicationObject -Path .\test.txt -Pattern 'DataCaptionFields=([^;]*);' -TrimLine
+
+FileName     : C:\test.txt
+FileLineNo   : 11
+ObjectType   : Table
+ObjectID     : 3
+ObjectName   : Payment Terms
+ObjectLineNo : 11
+Section      : PROPERTIES
+Matches      : {Code,Description}
+Line         : DataCaptionFields=Code,Description;
+
+FileName     : C:\test.txt
+FileLineNo   : 494
+ObjectType   : Table
+ObjectID     : 5
+ObjectName   : Finance Charge Terms
+ObjectLineNo : 11
+Section      : PROPERTIES
+Matches      : {Code,Description}
+Line         : DataCaptionFields=Code,Description;
+
+FileName     : C:\test.txt
+FileLineNo   : 806
+ObjectType   : Table
+ObjectID     : 10
+ObjectName   : Shipment Method
+ObjectLineNo : 11
+Section      : PROPERTIES
+Matches      : {Code,Description}
+Line         : DataCaptionFields=Code,Description;
 #>
 function Find-InNAVApplicationObject
 {
